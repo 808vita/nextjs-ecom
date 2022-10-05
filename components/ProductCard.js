@@ -6,7 +6,7 @@ const ProductCard = ({ data, inCart, setInCart }) => {
       let cartItems = JSON.parse(localStorage.getItem("cartItems"));
       console.log(cartItems);
       if (!cartItems) {
-        localStorage.setItem("cartItems", JSON.stringify([data.id]));
+        localStorage.setItem("cartItems", JSON.stringify([data._id]));
 
         cartItems = JSON.parse(localStorage.getItem("cartItems"));
         console.log(cartItems);
@@ -14,13 +14,13 @@ const ProductCard = ({ data, inCart, setInCart }) => {
         return;
       }
       console.log(cartItems, "oof not null");
-      if (cartItems.includes(data.id)) {
+      if (cartItems.includes(data._id)) {
         console.log(cartItems, "already added to cart");
 
         return;
       }
 
-      cartItems.push(data.id);
+      cartItems.push(data._id);
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
       setInCart(cartItems);
       // cartItems = JSON.parse(localStorage.getItem("cartItems"));
@@ -43,11 +43,11 @@ const ProductCard = ({ data, inCart, setInCart }) => {
               {data.title} ${data.price}
             </h5>
 
-            <p className="card-text">{data.desc}</p>
-            {inCart?.includes(data.id) ? (
+            <p className="card-text">{data.description}</p>
+            {inCart?.includes(data._id) ? (
               <p>Already In Cart</p>
             ) : (
-              <button className="btn btn-primary" onClick={() => handleClick()}>
+              <button className="btn btn-success" onClick={() => handleClick()}>
                 Add To Cart
               </button>
             )}

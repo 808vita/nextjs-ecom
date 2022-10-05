@@ -4,10 +4,10 @@ const CheckoutCard = ({ data }) => {
   return (
     <div className="col-sm-12 mb-3">
       <div className="d-flex">
-        <div className="card" style={{ width: "3rem" }}>
+        <div className="" style={{ width: "3rem" }}>
           <img
             src="https://avatars.githubusercontent.com/u/97225946?v=4"
-            className="card-img-top"
+            className="card-img-top rounded"
             alt="..."
           />
         </div>

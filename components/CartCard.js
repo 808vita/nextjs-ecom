@@ -3,7 +3,7 @@ import React from "react";
 const CartCard = ({ data, cartItems, setCartItems }) => {
   const handleClick = () => {
     try {
-      let filteredCart = cartItems.filter((e) => e !== data.id);
+      let filteredCart = cartItems.filter((e) => e !== data._id);
       console.log(filteredCart, "filtered");
       setCartItems(filteredCart);
     } catch (error) {
@@ -13,10 +13,10 @@ const CartCard = ({ data, cartItems, setCartItems }) => {
   return (
     <div className="col-sm-12 mb-3">
       <div className="d-flex">
-        <div className="card" style={{ width: "5rem" }}>
+        <div className="" style={{ width: "5rem" }}>
           <img
             src="https://avatars.githubusercontent.com/u/97225946?v=4"
-            className="card-img-top"
+            className="card-img-top rounded"
             alt="..."
           />
         </div>
