@@ -1,6 +1,8 @@
 import React from "react";
-
+import { useUser } from "@auth0/nextjs-auth0";
 const Header = () => {
+  const { user, error, isLoading } = useUser();
+
   return (
     <div className="container">
       <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
@@ -24,12 +26,19 @@ const Header = () => {
             Cart
           </button>
 
-          <button type="button" className="btn btn-outline-primary me-2">
-            Login
-          </button>
-          <button type="button" className="btn btn-primary">
-            Sign-up
-          </button>
+          {!user ? (
+            <a
+              href="/api/auth/login"
+              type="button"
+              className="btn btn-outline-primary me-2"
+            >
+              Login
+            </a>
+          ) : (
+            <button type="button" className="btn btn-primary">
+              logged options
+            </button>
+          )}
         </div>
       </header>
     </div>

@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import CheckoutCard from "../components/CheckoutCard";
 import { itemsList } from "../data/itemsList";
 import { fetchProducts, postCheckoutOrder } from "../resources/LoadData";
+import { useUser } from "@auth0/nextjs-auth0";
 
 export default function Checkout() {
   const [cartItems, setCartItems] = useState(null);
   const [productList, setProductList] = useState(null);
   const [currentItems, setCurrentItems] = useState(null);
   let filteredCartItems;
+  const { user, error, isLoading } = useUser();
+
   useEffect(() => {
     setCartItems(JSON.parse(localStorage.getItem("cartItems")));
     fetchProducts(setProductList);
@@ -20,14 +23,15 @@ export default function Checkout() {
     filteredCartItems = productList?.filter((e) => cartItems?.includes(e._id));
     setCurrentItems(filteredCartItems);
     console.log(filteredCartItems);
+    console.log(user);
   }, [cartItems, productList]);
 
   const handleClick = () => {
-    if (!cartItems || !productList || !currentItems) {
+    if (!cartItems || !productList || !currentItems || !user) {
       return;
     }
 
-    postCheckoutOrder({ email: "oof@order.mail", orderedItems: currentItems });
+    postCheckoutOrder({ email: user?.email, orderedItems: currentItems });
   };
 
   return (
