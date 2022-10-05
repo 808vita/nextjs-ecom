@@ -1,19 +1,10 @@
 import React from "react";
 
-const CartCard = ({ data, cartItems, setCartItems }) => {
-  const handleClick = () => {
-    try {
-      let filteredCart = cartItems.filter((e) => e !== data.id);
-      console.log(filteredCart, "filtered");
-      setCartItems(filteredCart);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const CheckoutCard = ({ data }) => {
   return (
     <div className="col-sm-12 mb-3">
       <div className="d-flex">
-        <div className="card" style={{ width: "5rem" }}>
+        <div className="card" style={{ width: "3rem" }}>
           <img
             src="https://avatars.githubusercontent.com/u/97225946?v=4"
             className="card-img-top"
@@ -27,13 +18,6 @@ const CartCard = ({ data, cartItems, setCartItems }) => {
           <h3 className="card-title">
             {data.title} ${data.price}
           </h3>
-
-          <button
-            className="btn btn-outline-warning"
-            onClick={() => handleClick()}
-          >
-            X
-          </button>
         </div>
       </div>
       <hr />
@@ -41,4 +25,4 @@ const CartCard = ({ data, cartItems, setCartItems }) => {
   );
 };
 
-export default CartCard;
+export default CheckoutCard;
