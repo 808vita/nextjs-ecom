@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProductCard = ({ data }) => {
+const ProductCard = ({ data, inCart, setInCart }) => {
   const handleClick = () => {
     try {
       let cartItems = JSON.parse(localStorage.getItem("cartItems"));
@@ -10,6 +10,7 @@ const ProductCard = ({ data }) => {
 
         cartItems = JSON.parse(localStorage.getItem("cartItems"));
         console.log(cartItems);
+        setInCart(cartItems);
         return;
       }
       console.log(cartItems, "oof not null");
@@ -21,30 +22,36 @@ const ProductCard = ({ data }) => {
 
       cartItems.push(data.id);
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
-
-      cartItems = JSON.parse(localStorage.getItem("cartItems"));
-      console.log(cartItems);
+      setInCart(cartItems);
+      // cartItems = JSON.parse(localStorage.getItem("cartItems"));
+      // console.log(cartItems);
     } catch (error) {
       console.log(error);
     }
   };
   return (
     <div className="col-sm-4 mb-3">
-      <div className="card" style={{ width: "18rem" }}>
-        <img
-          src="https://avatars.githubusercontent.com/u/97225946?v=4"
-          className="card-img-top"
-          alt="..."
-        />
-        <div className="card-body">
-          <h5 className="card-title">
-            {data.title} ${data.price}
-          </h5>
+      <div className="d-flex flex-wrap flex-column  align-items-center justify-content-center">
+        <div className="card" style={{ width: "14rem" }}>
+          <img
+            src="https://avatars.githubusercontent.com/u/97225946?v=4"
+            className="card-img-top"
+            alt="..."
+          />
+          <div className="card-body">
+            <h5 className="card-title">
+              {data.title} ${data.price}
+            </h5>
 
-          <p className="card-text">{data.desc}</p>
-          <button className="btn btn-primary" onClick={() => handleClick()}>
-            Add To Cart
-          </button>
+            <p className="card-text">{data.desc}</p>
+            {inCart?.includes(data.id) ? (
+              <p>Already In Cart</p>
+            ) : (
+              <button className="btn btn-primary" onClick={() => handleClick()}>
+                Add To Cart
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
