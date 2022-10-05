@@ -3,6 +3,7 @@ import CheckoutCard from "../components/CheckoutCard";
 import { itemsList } from "../data/itemsList";
 import { fetchProducts, postCheckoutOrder } from "../resources/LoadData";
 import { useUser } from "@auth0/nextjs-auth0";
+import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 
 export default function Checkout() {
   const [cartItems, setCartItems] = useState(null);
@@ -55,3 +56,5 @@ export default function Checkout() {
     </div>
   );
 }
+
+export const getServerSideProps = withPageAuthRequired();
