@@ -17,8 +17,11 @@ export default function Home() {
 
   return (
     <div className="container-fluid ">
-      <h6 className="mb-3 text-center">Welcome!</h6>
-      <div className="row g-3 text-center ">
+      <h6 className="mb-3 text-center pb-3">Welcome!</h6>
+      <div
+        className="row g-5 text-center  border border-secondary rounded"
+        style={{ maxWidth: "1000px", "--bs-border-opacity": 0.25 }}
+      >
         {productList?.map((item) => (
           <ProductCard
             key={item._id}

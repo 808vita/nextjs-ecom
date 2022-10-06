@@ -68,7 +68,7 @@ export const postAddProduct = async (productInfo, router) => {
     if (response.ok) {
       console.log("oof", json);
       //set state ?
-      router.push("/admin");
+      router.reload();
       //navigate ?
     }
   } catch (error) {
