@@ -37,22 +37,30 @@ export default function Checkout() {
 
   return (
     <div className="container-fluid ">
-      <h6 className="mb-3 text-center">Confirm Checkout</h6>
-      <button onClick={() => handleClick()}>place order</button>
-      <div className="row g-3 text-center">
-        <div className="col-sm-6 mb-3">
-          {cartItems?.length > 0 &&
-            productList?.map(
-              (item) =>
-                cartItems.includes(item._id) && (
-                  <CheckoutCard key={item._id} data={item} />
-                )
-            )}
-        </div>
-        <div className="col-sm-6 mb-3">
-          {cartItems?.length > 0 && <h4>Totals here with checkout button</h4>}
-        </div>
-      </div>
+      {currentItems?.length > 0 ? (
+        <>
+          <h6 className="mb-3 text-center">Confirm Checkout</h6>
+          <button onClick={() => handleClick()}>place order</button>
+          <div className="row g-3 text-center">
+            <div className="col-sm-6 mb-3">
+              {cartItems?.length > 0 &&
+                productList?.map(
+                  (item) =>
+                    cartItems.includes(item._id) && (
+                      <CheckoutCard key={item._id} data={item} />
+                    )
+                )}
+            </div>
+            <div className="col-sm-6 mb-3">
+              {cartItems?.length > 0 && (
+                <h4>Totals here with checkout button</h4>
+              )}
+            </div>
+          </div>
+        </>
+      ) : (
+        <h6 className="mb-3 text-center">Please add items to cart</h6>
+      )}
     </div>
   );
 }

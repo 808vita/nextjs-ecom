@@ -32,26 +32,34 @@ export default function Cart() {
 
   return (
     <div className="container-fluid ">
-      <h6 className="mb-3 text-center">Cart Items</h6>
-      <div className="row g-8 text-center">
-        <div className="col-sm-6 mb-3">
-          {cartItems?.length > 0 &&
-            productList?.map(
-              (item) =>
-                cartItems.includes(item._id) && (
-                  <CartCard
-                    key={item._id}
-                    data={item}
-                    cartItems={cartItems}
-                    setCartItems={setCartItems}
-                  />
-                )
-            )}
-        </div>
-        <div className="col-sm-6 mb-3">
-          {cartItems?.length > 0 && <h4>Totals here with checkout button</h4>}
-        </div>
-      </div>
+      {cartItems?.length > 0 ? (
+        <>
+          <h6 className="mb-3 text-center">Cart Items</h6>
+          <div className="row g-8 text-center">
+            <div className="col-sm-6 mb-3">
+              {cartItems?.length > 0 &&
+                productList?.map(
+                  (item) =>
+                    cartItems.includes(item._id) && (
+                      <CartCard
+                        key={item._id}
+                        data={item}
+                        cartItems={cartItems}
+                        setCartItems={setCartItems}
+                      />
+                    )
+                )}
+            </div>
+            <div className="col-sm-6 mb-3">
+              {cartItems?.length > 0 && (
+                <h4>Totals here with checkout button</h4>
+              )}
+            </div>
+          </div>
+        </>
+      ) : (
+        <h6 className="mb-3 text-center">Please add items to cart</h6>
+      )}
     </div>
   );
 }
