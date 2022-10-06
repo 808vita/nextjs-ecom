@@ -29,7 +29,7 @@ const CartCard = ({ data, cartItems, setCartItems }) => {
             className="d-flex flex-wrap flex-column  align-items-center justify-content-center"
             style={{ width: "10rem" }}
           >
-            <h3 className="card-title">{data.title}</h3>
+            <h3 className="card-title">{data.title.substring(0, 10)}</h3>
             <h5 className="card-title">${data.price}</h5>
           </div>
           <button

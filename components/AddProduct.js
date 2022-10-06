@@ -1,19 +1,22 @@
 import { useState } from "react";
-
+import { postAddProduct } from "../resources/LoadData";
+import { useRouter } from "next/router";
 const AddProduct = () => {
   const [title, setTitle] = useState("");
   const [type, setType] = useState("");
   const [price, setPrice] = useState("");
-  const [Description, setDescription] = useState("");
-
+  const [description, setDescription] = useState("");
+  const router = useRouter();
   const addProduct = () => {
-    if (!title || !type || type === "Type" || !price || !Description) {
+    if (!title || !type || type === "Type" || !price || !description) {
       console.log("please fill all fields");
       return;
     }
 
-    console.log(title, type, price, Description);
     console.log("oof");
+    console.log({ title, type, price, description });
+
+    postAddProduct({ title, type, price, description }, router);
   };
   return (
     <div>
@@ -48,7 +51,7 @@ const AddProduct = () => {
         />
       </div>
       <div className="input-group input-group-md mb-3">
-        <span className="input-group-text">Description</span>
+        <span className="input-group-text">description</span>
         <input
           type="text"
           className="form-control"

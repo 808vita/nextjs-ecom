@@ -41,7 +41,7 @@ const ProductCard = ({ data, inCart, setInCart }) => {
           />
           <div className="card-body">
             <h5 className="card-title">
-              {data.title} ${data.price}
+              {data.title.substring(0, 10)} ${data.price}
             </h5>
 
             <p className="card-text">{data.description}</p>
