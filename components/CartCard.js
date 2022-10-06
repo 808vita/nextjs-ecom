@@ -15,7 +15,7 @@ const CartCard = ({ data, cartItems, setCartItems }) => {
       <div className="d-flex">
         <div className="" style={{ width: "5rem" }}>
           <img
-            src="https://avatars.githubusercontent.com/u/97225946?v=4"
+            src={`/${data.type}.jpg`}
             className="card-img-top rounded"
             alt="..."
           />

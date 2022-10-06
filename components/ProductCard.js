@@ -34,7 +34,8 @@ const ProductCard = ({ data, inCart, setInCart }) => {
       <div className="d-flex flex-wrap flex-column  align-items-center justify-content-center">
         <div className="card" style={{ width: "14rem" }}>
           <img
-            src="https://avatars.githubusercontent.com/u/97225946?v=4"
+            src={`/${data.type}.jpg`}
+            style={{ height: "10rem", objectFit: "cover" }}
             className="card-img-top"
             alt="..."
           />
