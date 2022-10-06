@@ -71,7 +71,7 @@ export default function Checkout() {
             </div>
             <div>
               <button
-                className="btn btn-success btn-lg"
+                className="btn btn-success btn-lg mb-5"
                 onClick={() => handleClick()}
               >
                 Place Order

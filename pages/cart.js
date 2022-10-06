@@ -67,7 +67,9 @@ export default function Cart() {
             </div>
             <div>
               <Link href={"/checkout"}>
-                <a className="btn btn-outline-success btn-lg">Checkout Page</a>
+                <a className="btn btn-outline-success btn-lg mb-5">
+                  Checkout Page
+                </a>
               </Link>
             </div>
           </div>
