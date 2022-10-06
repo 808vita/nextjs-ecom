@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import CartCard from "../components/CartCard";
 import { itemsList } from "../data/itemsList";
@@ -7,6 +8,7 @@ export default function Cart() {
   const [cartItems, setCartItems] = useState(null);
   const [productList, setProductList] = useState(null);
   const [currentItems, setCurrentItems] = useState(null);
+  const [cartTotal, setCartTotal] = useState(null);
   let filteredCartItems;
   useEffect(() => {
     setCartItems(JSON.parse(localStorage.getItem("cartItems")));
@@ -28,15 +30,23 @@ export default function Cart() {
     filteredCartItems = productList?.filter((e) => cartItems?.includes(e._id));
     setCurrentItems(filteredCartItems);
     console.log(filteredCartItems);
+
+    setCartTotal(
+      filteredCartItems.reduce(
+        (previousValue, object) => previousValue + object.price,
+        0
+      )
+    );
   }, [cartItems, productList]);
 
   return (
     <div className="container-fluid ">
       {cartItems?.length > 0 ? (
         <>
-          <h6 className="mb-3 text-center">Cart Items</h6>
-          <div className="row g-8 text-center ">
-            <div className="col-sm-6 mb-3">
+          <h6 className="mb-3 text-center">Current Items In Cart</h6>
+
+          <div className="row g-8 text-center">
+            <div className="col-sm-12 mb-3">
               {cartItems?.length > 0 &&
                 productList?.map(
                   (item) =>
@@ -50,10 +60,15 @@ export default function Cart() {
                     )
                 )}
             </div>
-            <div className="col-sm-6 mb-3">
-              {cartItems?.length > 0 && (
-                <h4>Totals here with checkout button</h4>
-              )}
+            <hr />
+
+            <div className="col-sm-12 mb-3">
+              <h6>Total:$ {cartTotal}</h6>
+            </div>
+            <div>
+              <Link href={"/checkout"}>
+                <a className="btn btn-outline-success btn-lg">Checkout Page</a>
+              </Link>
             </div>
           </div>
         </>

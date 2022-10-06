@@ -10,6 +10,8 @@ export default function Checkout() {
   const [cartItems, setCartItems] = useState(null);
   const [productList, setProductList] = useState(null);
   const [currentItems, setCurrentItems] = useState(null);
+  const [cartTotal, setCartTotal] = useState(null);
+
   let filteredCartItems;
   const { user, error, isLoading } = useUser();
   const router = useRouter();
@@ -27,6 +29,12 @@ export default function Checkout() {
     setCurrentItems(filteredCartItems);
     console.log(filteredCartItems);
     console.log(user);
+    setCartTotal(
+      filteredCartItems.reduce(
+        (previousValue, object) => previousValue + object.price,
+        0
+      )
+    );
   }, [cartItems, productList]);
 
   const handleClick = () => {
@@ -45,9 +53,9 @@ export default function Checkout() {
       {currentItems?.length > 0 ? (
         <>
           <h6 className="mb-3 text-center">Confirm Checkout</h6>
-          <button onClick={() => handleClick()}>place order</button>
-          <div className="row g-3 text-center">
-            <div className="col-sm-6 mb-3">
+
+          <div className="row g-8 text-center">
+            <div className="col-sm-12 mb-3">
               {cartItems?.length > 0 &&
                 productList?.map(
                   (item) =>
@@ -56,10 +64,18 @@ export default function Checkout() {
                     )
                 )}
             </div>
-            <div className="col-sm-6 mb-3">
-              {cartItems?.length > 0 && (
-                <h4>Totals here with checkout button</h4>
-              )}
+            <hr />
+
+            <div className="col-sm-12 mb-3">
+              <h6>Total:$ {cartTotal}</h6>
+            </div>
+            <div>
+              <button
+                className="btn btn-success btn-lg"
+                onClick={() => handleClick()}
+              >
+                Place Order
+              </button>
             </div>
           </div>
         </>
