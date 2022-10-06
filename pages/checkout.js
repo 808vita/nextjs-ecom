@@ -4,6 +4,7 @@ import { itemsList } from "../data/itemsList";
 import { fetchProducts, postCheckoutOrder } from "../resources/LoadData";
 import { useUser } from "@auth0/nextjs-auth0";
 import { withPageAuthRequired } from "@auth0/nextjs-auth0";
+import { useRouter } from "next/router";
 
 export default function Checkout() {
   const [cartItems, setCartItems] = useState(null);
@@ -11,6 +12,7 @@ export default function Checkout() {
   const [currentItems, setCurrentItems] = useState(null);
   let filteredCartItems;
   const { user, error, isLoading } = useUser();
+  const router = useRouter();
 
   useEffect(() => {
     setCartItems(JSON.parse(localStorage.getItem("cartItems")));
@@ -32,7 +34,10 @@ export default function Checkout() {
       return;
     }
 
-    postCheckoutOrder({ email: user?.email, orderedItems: currentItems });
+    postCheckoutOrder(
+      { email: user?.email, orderedItems: currentItems },
+      router
+    );
   };
 
   return (
