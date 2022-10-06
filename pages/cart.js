@@ -35,7 +35,7 @@ export default function Cart() {
       {cartItems?.length > 0 ? (
         <>
           <h6 className="mb-3 text-center">Cart Items</h6>
-          <div className="row g-8 text-center">
+          <div className="row g-8 text-center ">
             <div className="col-sm-6 mb-3">
               {cartItems?.length > 0 &&
                 productList?.map(

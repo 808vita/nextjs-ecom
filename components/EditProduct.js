@@ -39,7 +39,9 @@ const EditProduct = () => {
           aria-describedby="inputGroup-sizing-sm"
         />
       </div>
-      <button>Update Details</button>
+      <div className="d-flex align-items-center justify-content-center">
+        <button className="btn btn-primary mb-3">Update Details</button>
+      </div>
     </div>
   );
 };
