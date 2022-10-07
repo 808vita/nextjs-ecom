@@ -21,7 +21,7 @@ export default function Profile() {
       <div className="row g-8 text-center" style={{ maxWidth: "800px" }}>
         {ordersList && ordersList?.length > 0 ? (
           ordersList.map((order, index) => (
-            <OrdersCard key={order.id} order={order} index={index} />
+            <OrdersCard key={index} order={order} index={index} />
           ))
         ) : (
           <h6>No orders placed</h6>

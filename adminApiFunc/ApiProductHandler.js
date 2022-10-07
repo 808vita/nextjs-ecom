@@ -18,14 +18,14 @@ const editProductDetails = async (req, res) => {
   try {
     await DbConnect();
 
-    const { productId, title, price, description } = res.body;
+    const { productId, title, price, description } = req.body;
 
     if (!mongoose.Types.ObjectId.isValid(productId)) {
       return res.json(404).json({ error: "no such record" });
       //check for vaild mongodb id
     }
 
-    const productExists = await Dealer.findById(productId);
+    const productExists = await ProductData.findById(productId);
     console.log(productExists);
     if (!productExists) {
       return res.status(404).json({ error: "no such record" });
@@ -37,7 +37,7 @@ const editProductDetails = async (req, res) => {
       price,
       description,
     });
-    res.status(204).json({ productUpdate });
+    res.status(201).json(productUpdate);
   } catch (error) {
     res.status(400).json({ error });
   }
