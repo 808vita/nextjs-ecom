@@ -9,7 +9,7 @@ export default function Cart() {
   const [productList, setProductList] = useState(null);
   const [currentItems, setCurrentItems] = useState(null);
   const [cartTotal, setCartTotal] = useState(null);
-  let filteredCartItems;
+
   useEffect(() => {
     setCartItems(JSON.parse(localStorage.getItem("cartItems")));
     fetchProducts(setProductList);
@@ -27,7 +27,9 @@ export default function Cart() {
     if (!cartItems || !productList) {
       return;
     }
-    filteredCartItems = productList?.filter((e) => cartItems?.includes(e._id));
+    let filteredCartItems = productList?.filter((e) =>
+      cartItems?.includes(e._id)
+    );
     setCurrentItems(filteredCartItems);
     console.log(filteredCartItems);
 

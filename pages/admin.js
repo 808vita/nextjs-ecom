@@ -21,7 +21,7 @@ export default function Admin() {
     if (user?.role[0] !== "admin") {
       router.push("/");
     }
-  }, [user]);
+  }, [user, router]);
 
   return (
     <>

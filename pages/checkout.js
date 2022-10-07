@@ -22,13 +22,15 @@ export default function Checkout() {
   useEffect(() => {
     setCartItems(JSON.parse(localStorage.getItem("cartItems")));
     fetchProducts(setProductList);
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     if (!cartItems || !productList) {
       return;
     }
-    filteredCartItems = productList?.filter((e) => cartItems?.includes(e._id));
+    let filteredCartItems = productList?.filter((e) =>
+      cartItems?.includes(e._id)
+    );
     setCurrentItems(filteredCartItems);
     console.log(filteredCartItems);
     console.log(user);

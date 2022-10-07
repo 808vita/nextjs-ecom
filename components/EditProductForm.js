@@ -21,7 +21,7 @@ const EditProductForm = ({ data, setSelectedProduct }) => {
     setPrice(data.price);
     setDescription(data.description);
     data;
-  }, []);
+  }, [data]);
 
   const addProduct = () => {
     if (!title || !productId || !price || !description) {
