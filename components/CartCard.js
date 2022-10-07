@@ -1,11 +1,15 @@
 import React from "react";
+import { useGlobalContext } from "../context/useGlobalContext";
 
 const CartCard = ({ data, cartItems, setCartItems }) => {
+  const { setNotification } = useGlobalContext();
+
   const handleClick = () => {
     try {
       let filteredCart = cartItems.filter((e) => e !== data._id);
       console.log(filteredCart, "filtered");
       setCartItems(filteredCart);
+      setNotification({ msg: "Removed from cart", type: "info" });
     } catch (error) {
       console.log(error);
     }
