@@ -44,7 +44,7 @@ const ProductCard = ({ data, inCart, setInCart }) => {
               {data.title.substring(0, 10)} ${data.price}
             </h5>
 
-            <p className="card-text">{data.description.substring(0, 40)}</p>
+            <p className="card-text">{data.description.substring(0, 25)}</p>
             {inCart?.includes(data._id) ? (
               <p>
                 Already In Cart{" "}
