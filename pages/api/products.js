@@ -3,6 +3,7 @@ import ProductData from "../../models/productModel";
 
 export default async function getProducts(req, res) {
   if (req.method === "GET") {
+    //get all products from db -- open to public
     try {
       await DbConnect();
 

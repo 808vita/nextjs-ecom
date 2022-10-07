@@ -1,7 +1,8 @@
 import DbConnect from "../../utils/DbConnect";
 import OrderData from "../../models/orderModel";
+import { withApiAuthRequired } from "@auth0/nextjs-auth0";
 
-export default async function (req, res) {
+export default withApiAuthRequired(async function (req, res) {
   if (req.method === "POST") {
     try {
       await DbConnect();
@@ -12,4 +13,4 @@ export default async function (req, res) {
       res.status(400).json({ error });
     }
   }
-}
+});
