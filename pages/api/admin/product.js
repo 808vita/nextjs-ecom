@@ -1,6 +1,7 @@
 import DbConnect from "../../../utils/DbConnect";
 import ProductData from "../../../models/productModel";
 import { withApiAuthRequired, getSession } from "@auth0/nextjs-auth0";
+import ApiProductHandler from "../../../adminApiFunc/ApiProductHandler";
 
 export default withApiAuthRequired(function checkAdmin(req, res) {
   const session = getSession(req, res);
@@ -12,18 +13,19 @@ export default withApiAuthRequired(function checkAdmin(req, res) {
     return;
   }
   ApiProductHandler(req, res);
-  async function ApiProductHandler(req, res) {
-    if (req.method === "POST") {
-      //add product to db -- requires admin role
-      try {
-        await DbConnect();
-        const session = getSession(req, res);
-        const user = session.user;
-        const product = await ProductData.create(req.body);
-        res.json({ product, user });
-      } catch (error) {
-        res.status(400).json({ error });
-      }
-    }
-  }
+
+  // async function ApiProductHandler(req, res) {
+  //   if (req.method === "POST") {
+  //     //add product to db -- requires admin role
+  //     try {
+  //       await DbConnect();
+  //       const session = getSession(req, res);
+  //       const user = session.user;
+  //       const product = await ProductData.create(req.body);
+  //       res.json({ product, user });
+  //     } catch (error) {
+  //       res.status(400).json({ error });
+  //     }
+  //   }
+  // }
 });

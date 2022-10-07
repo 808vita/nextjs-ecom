@@ -6,8 +6,9 @@ export default async function getProducts(req, res) {
     //get all products from db -- open to public
     try {
       await DbConnect();
-
-      const productList = await ProductData.find().sort({ createdAt: -1 });
+      //find all products and sort based on updatedAt
+      // -- would display recently added/modified product at top
+      const productList = await ProductData.find().sort({ updatedAt: -1 });
       res.status(200).json(productList);
     } catch (error) {
       res.status(400).json({ error });
