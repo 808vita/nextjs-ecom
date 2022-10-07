@@ -41,6 +41,7 @@ export const fetchOrders = async (setOrdersList) => {
     }
   } catch (error) {
     console.log("error", error);
+    setNotification({ msg: error, type: "error" });
   }
 };
 
@@ -70,10 +71,11 @@ export const postCheckoutOrder = async (orderInfo, router, setNotification) => {
     }
   } catch (error) {
     console.log("error", error);
+    setNotification({ msg: error, type: "error" });
   }
 };
 
-export const postAddProduct = async (productInfo, router) => {
+export const postAddProduct = async (productInfo, router, setNotification) => {
   try {
     const response = await fetch("/api/admin/product", {
       method: "POST",
@@ -94,13 +96,19 @@ export const postAddProduct = async (productInfo, router) => {
       //set state ?
       router.reload();
       //navigate ?
+      setNotification({ msg: "New product added", type: "success" });
     }
   } catch (error) {
     console.log("error", error);
+    setNotification({ msg: error, type: "error" });
   }
 };
 
-export const patchEditProduct = async (productInfo, router) => {
+export const patchEditProduct = async (
+  productInfo,
+  router,
+  setNotification
+) => {
   try {
     //productInfo needs to contain following objects
     //productId , title , price , description
@@ -123,8 +131,10 @@ export const patchEditProduct = async (productInfo, router) => {
       //set state ?
       router.reload();
       //navigate ?
+      setNotification({ msg: "Product details updated", type: "success" });
     }
   } catch (error) {
     console.log("error", error);
+    setNotification({ msg: error, type: "error" });
   }
 };

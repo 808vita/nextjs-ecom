@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { patchEditProduct } from "../resources/LoadData";
 import { useRouter } from "next/router";
+import { useGlobalContext } from "../context/useGlobalContext";
 
 const EditProductForm = ({ data, setSelectedProduct }) => {
   const [productId, setProductId] = useState("");
@@ -9,6 +10,7 @@ const EditProductForm = ({ data, setSelectedProduct }) => {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const router = useRouter();
+  const { setNotification } = useGlobalContext();
 
   useEffect(() => {
     // setProductId("63405761db5601a0938e8731");
@@ -39,7 +41,11 @@ const EditProductForm = ({ data, setSelectedProduct }) => {
     console.log("oof");
     console.log({ productId, title, price, description });
 
-    patchEditProduct({ productId, title, price, description }, router);
+    patchEditProduct(
+      { productId, title, price, description },
+      router,
+      setNotification
+    );
   };
 
   const deselectProduct = () => {

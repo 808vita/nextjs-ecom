@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { postAddProduct } from "../resources/LoadData";
 import { useRouter } from "next/router";
+import { useGlobalContext } from "../context/useGlobalContext";
+
 const AddProduct = () => {
   const [title, setTitle] = useState("");
   const [type, setType] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const router = useRouter();
+  const { setNotification } = useGlobalContext();
+
   const addProduct = () => {
     if (!title || !type || type === "Type" || !price || !description) {
       console.log("please fill all fields");
@@ -16,7 +20,11 @@ const AddProduct = () => {
     console.log("oof");
     console.log({ title, type, price, description });
 
-    postAddProduct({ title, type, price, description }, router);
+    postAddProduct(
+      { title, type, price, description },
+      router,
+      setNotification
+    );
   };
   return (
     <div>
