@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import AddProduct from "../components/AddProduct";
-import EditProduct from "../components/EditProduct";
+import EditProductForm from "../components/EditProductForm";
 import Toggle from "../components/Toggle";
 
 import { withPageAuthRequired, useUser } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
+import EditProduct from "../components/EditProduct";
 
 export default function Admin() {
   const [currSelection, setCurrSelection] = useState(null);
@@ -25,12 +26,13 @@ export default function Admin() {
   return (
     <>
       {user?.role[0] === "admin" ? (
-        <div>
-          <h1>admin page</h1>
-          <h2>edit deatais</h2>
-          <h2>add product</h2>
+        <div className="d-flex flex-wrap flex-column align-items-center justify-content-center">
+          <h3 className="text-muted mb-3">Admin Options</h3>
+          <p className="text-muted mb-3">(select an option below)</p>
+
           <Toggle setCurrSelection={setCurrSelection} />
           {currSelection === "addProduct" && <AddProduct />}
+          {/* {currSelection === "editProduct" && <EditProductForm />} */}
           {currSelection === "editProduct" && <EditProduct />}
         </div>
       ) : (

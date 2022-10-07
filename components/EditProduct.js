@@ -1,72 +1,48 @@
 import { useState, useEffect } from "react";
-import { patchEditProduct } from "../resources/LoadData";
-import { useRouter } from "next/router";
+
+import ProductCard from "../components/ProductCard";
+
+import { fetchProducts } from "../resources/LoadData";
+import EditCard from "./EditCard";
+import EditProductForm from "./EditProductForm";
 
 const EditProduct = () => {
-  const [productId, setProductId] = useState("");
-  const [title, setTitle] = useState("");
-
-  const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
-  const router = useRouter();
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [productList, setProductList] = useState(null);
 
   useEffect(() => {
-    setProductId("63405761db5601a0938e8731");
-    //edits only this product
+    fetchProducts(setProductList);
   }, []);
 
-  const addProduct = () => {
-    if (!title || !productId || !price || !description) {
-      console.log("please fill all fields");
-      return;
-    }
+  useEffect(() => {
+    console.log(selectedProduct);
+  }, [selectedProduct]);
 
-    console.log("oof");
-    console.log({ productId, title, price, description });
-
-    patchEditProduct({ productId, title, price, description }, router);
-  };
   return (
-    <div>
-      <div className="input-group input-group-md mb-3">
-        <span className="input-group-text">Title</span>
-        <input
-          type="text"
-          className="form-control"
-          aria-label="Sizing example input"
-          aria-describedby="inputGroup-sizing-md"
-          onChange={(e) => setTitle(e.target.value)}
-          value={title}
+    <>
+      {!selectedProduct ? (
+        <div className="container-fluid mt-5">
+          <h6 className="mb-3 text-center text-muted">Listed Products</h6>
+          <div
+            className="row g-5 text-center  border border-secondary rounded"
+            style={{ maxWidth: "800px", "--bs-border-opacity": 0.25 }}
+          >
+            {productList?.map((item) => (
+              <EditCard
+                key={item._id}
+                data={item}
+                setSelectedProduct={setSelectedProduct}
+              />
+            ))}
+          </div>
+        </div>
+      ) : (
+        <EditProductForm
+          data={selectedProduct}
+          setSelectedProduct={setSelectedProduct}
         />
-      </div>
-      <div className="input-group input-group-md mb-3">
-        <span className="input-group-text">Price</span>
-        <input
-          type="number"
-          className="form-control"
-          aria-label="Sizing example input"
-          aria-describedby="inputGroup-sizing-md"
-          onChange={(e) => setPrice(e.target.value)}
-          value={price}
-        />
-      </div>
-      <div className="input-group input-group-md mb-3">
-        <span className="input-group-text">description</span>
-        <input
-          type="text"
-          className="form-control"
-          aria-label="Sizing example input"
-          aria-describedby="inputGroup-sizing-md"
-          onChange={(e) => setDescription(e.target.value)}
-          value={description}
-        />
-      </div>
-      <div className="d-flex align-items-center justify-content-center">
-        <button className="btn btn-primary mb-3" onClick={() => addProduct()}>
-          Update Details
-        </button>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

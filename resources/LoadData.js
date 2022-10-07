@@ -120,7 +120,7 @@ export const patchEditProduct = async (productInfo, router) => {
     if (response.ok) {
       console.log("oof", json);
       //set state ?
-      router.push("/");
+      router.reload();
       //navigate ?
     }
   } catch (error) {
