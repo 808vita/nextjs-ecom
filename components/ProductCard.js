@@ -30,9 +30,9 @@ const ProductCard = ({ data, inCart, setInCart }) => {
     }
   };
   return (
-    <div className="col-sm-4 mb-3">
+    <div className="col-sm-4 mb-3 d-flex align-self-stretch justify-content-center">
       <div className="d-flex flex-wrap flex-column  align-items-center justify-content-center">
-        <div className="card" style={{ width: "14rem" }}>
+        <div className="card h-100" style={{ width: "14rem" }}>
           <img
             src={`/${data.type}.jpg`}
             style={{ height: "10rem", objectFit: "cover" }}
@@ -44,7 +44,7 @@ const ProductCard = ({ data, inCart, setInCart }) => {
               {data.title.substring(0, 10)} ${data.price}
             </h5>
 
-            <p className="card-text">{data.description}</p>
+            <p className="card-text">{data.description.substring(0, 40)}</p>
             {inCart?.includes(data._id) ? (
               <p>
                 Already In Cart{" "}
