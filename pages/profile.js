@@ -14,9 +14,7 @@ export default function Profile() {
 
   return (
     <div className="container-fluid d-flex flex-column flex-wrap align-items-center justify-content-center ">
-      <h1>profile page</h1>
-      <h2>profile deatais</h2>
-      <h2>order deatais</h2>
+      <h3 className="text-secondary mb-3">Account Info</h3>
       <div className="mb-5">
         <ProfileCard />
       </div>
