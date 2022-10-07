@@ -11,7 +11,7 @@ const OrdersCard = ({ order, index }) => {
         className="p-5 mb-5 border border-secondary rounded"
       >
         <div className="d-flex flex-wrap flex-column align-items-center justify-content-center">
-          <h4 className="text-muted pb-2">Latest Order</h4>
+          <h4 className="text-secondary pb-2">Latest Order</h4>
           <div className="d-flex flex-wrap flex-column align-items-start justify-content-center">
             <p key={order._id} className="text-muted">
               order id: {order._id}

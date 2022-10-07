@@ -27,9 +27,9 @@ const ProfileCard = () => {
             <h6>{user.name}</h6>
             <h6>{user.email}</h6>
             {user.role && user.role[0] === "admin" ? (
-              <h6>Admin Account</h6>
+              <h6 className="text-success">Admin Account</h6>
             ) : (
-              <h6>Normal Account</h6>
+              <h6 className="text-muted">Normal Account</h6>
             )}
           </div>
         </div>
