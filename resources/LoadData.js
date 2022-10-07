@@ -44,7 +44,7 @@ export const fetchOrders = async (setOrdersList) => {
   }
 };
 
-export const postCheckoutOrder = async (orderInfo, router) => {
+export const postCheckoutOrder = async (orderInfo, router, setNotification) => {
   try {
     const response = await fetch("/api/checkout-order", {
       method: "POST",
@@ -66,6 +66,7 @@ export const postCheckoutOrder = async (orderInfo, router) => {
       localStorage.removeItem("cartItems");
       //navigate ?
       router.push("/profile");
+      setNotification({ msg: "Order Placed!", type: "success" });
     }
   } catch (error) {
     console.log("error", error);

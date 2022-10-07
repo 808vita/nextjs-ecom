@@ -12,7 +12,7 @@ const Toasts = () => {
     setToast("show");
     setTimeout(() => {
       toggler();
-    }, 3000);
+    }, 2000);
   }, [notification]);
 
   return (

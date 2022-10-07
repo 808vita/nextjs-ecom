@@ -5,6 +5,7 @@ import { fetchProducts, postCheckoutOrder } from "../resources/LoadData";
 import { useUser } from "@auth0/nextjs-auth0";
 import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
+import { useGlobalContext } from "../context/useGlobalContext";
 
 export default function Checkout() {
   const [cartItems, setCartItems] = useState(null);
@@ -15,6 +16,8 @@ export default function Checkout() {
   let filteredCartItems;
   const { user, error, isLoading } = useUser();
   const router = useRouter();
+
+  const { setNotification } = useGlobalContext();
 
   useEffect(() => {
     setCartItems(JSON.parse(localStorage.getItem("cartItems")));
@@ -44,7 +47,8 @@ export default function Checkout() {
 
     postCheckoutOrder(
       { email: user?.email, orderedItems: currentItems },
-      router
+      router,
+      setNotification
     );
   };
 
@@ -70,7 +74,7 @@ export default function Checkout() {
             <hr />
 
             <div className="col-sm-12 mb-3">
-              <h6>Total:$ {cartTotal}</h6>
+              <h6>Total:$ {cartTotal?.toFixed(2)}</h6>
             </div>
             <div>
               <button

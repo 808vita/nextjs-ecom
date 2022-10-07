@@ -1,6 +1,9 @@
 import React from "react";
+import { useGlobalContext } from "../context/useGlobalContext";
 
 const ProductCard = ({ data, inCart, setInCart }) => {
+  const { setNotification } = useGlobalContext();
+
   const handleClick = () => {
     try {
       let cartItems = JSON.parse(localStorage.getItem("cartItems"));
@@ -11,6 +14,7 @@ const ProductCard = ({ data, inCart, setInCart }) => {
         cartItems = JSON.parse(localStorage.getItem("cartItems"));
         console.log(cartItems);
         setInCart(cartItems);
+        setNotification({ msg: "Added to cart", type: "info" });
         return;
       }
       console.log(cartItems, "oof not null");
@@ -23,6 +27,8 @@ const ProductCard = ({ data, inCart, setInCart }) => {
       cartItems.push(data._id);
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
       setInCart(cartItems);
+      setNotification({ msg: "Added to cart", type: "info" });
+
       // cartItems = JSON.parse(localStorage.getItem("cartItems"));
       // console.log(cartItems);
     } catch (error) {

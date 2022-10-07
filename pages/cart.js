@@ -66,7 +66,7 @@ export default function Cart() {
             <hr />
 
             <div className="col-sm-12 mb-3">
-              <h6>Total:$ {cartTotal}</h6>
+              <h6>Total:$ {cartTotal?.toFixed(2)}</h6>
             </div>
             <div>
               <Link href={"/checkout"}>
