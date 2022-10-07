@@ -7,7 +7,7 @@ export default async function getProducts(req, res) {
     try {
       await DbConnect();
 
-      const productList = await ProductData.find();
+      const productList = await ProductData.find().sort({ createdAt: -1 });
       res.status(200).json(productList);
     } catch (error) {
       res.status(400).json({ error });

@@ -21,6 +21,29 @@ export const fetchProducts = async (setProductList) => {
   }
 };
 
+export const fetchOrders = async (setOrdersList) => {
+  try {
+    const response = await fetch("/api/orders", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const json = await response.json();
+
+    if (!response.ok) {
+      console.log(json.error);
+    }
+    if (response.ok) {
+      console.log("oof", json);
+      //set state ?
+      setOrdersList(json);
+    }
+  } catch (error) {
+    console.log("error", error);
+  }
+};
+
 export const postCheckoutOrder = async (orderInfo, router) => {
   try {
     const response = await fetch("/api/checkout-order", {
