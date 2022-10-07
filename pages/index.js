@@ -16,7 +16,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="container-fluid ">
+    <div className="container-fluid mt-5">
       <h6 className="mb-3 text-center mb-3">Welcome!</h6>
       <div
         className="row g-5 text-center  border border-secondary rounded"
