@@ -3,6 +3,8 @@ import ProfileCard from "../components/ProfileCard";
 import { useUser } from "@auth0/nextjs-auth0";
 import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { fetchOrders } from "../resources/LoadData";
+import CheckoutCard from "../components/CheckoutCard";
+import OrdersCard from "../components/OrdersCard";
 export default function Profile() {
   const [ordersList, setOrdersList] = useState(null);
 
@@ -11,16 +13,21 @@ export default function Profile() {
   }, []);
 
   return (
-    <div>
+    <div className="container-fluid d-flex flex-column flex-wrap align-items-center justify-content-center ">
       <h1>profile page</h1>
       <h2>profile deatais</h2>
       <h2>order deatais</h2>
-      <div>
+      <div className="mb-5">
         <ProfileCard />
       </div>
-      <div>
-        {ordersList &&
-          ordersList.map((order) => <p key={order._id}>{order._id}</p>)}
+      <div className="row g-8 text-center" style={{ maxWidth: "800px" }}>
+        {ordersList && ordersList?.length > 0 ? (
+          ordersList.map((order, index) => (
+            <OrdersCard key={order.id} order={order} index={index} />
+          ))
+        ) : (
+          <h6>No orders placed</h6>
+        )}
       </div>
     </div>
   );

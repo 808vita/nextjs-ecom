@@ -5,8 +5,12 @@ const ProfileCard = () => {
   const { user, error, isLoading } = useUser();
   return (
     <div
-      style={{ maxWidth: "1000px", "--bs-border-opacity": 0.25 }}
-      className="p-3 border border-secondary rounded"
+      style={{
+        maxWidth: "600px",
+        "--bs-border-opacity": 0.3,
+        padding: "1.5vw",
+      }}
+      className=" border border-secondary rounded"
     >
       {user && (
         <div className="d-flex flex-wrap align-items-center justify-content-between">
