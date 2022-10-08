@@ -12,7 +12,7 @@ export default function Checkout() {
   const [productList, setProductList] = useState(null);
   const [currentItems, setCurrentItems] = useState(null);
   const [cartTotal, setCartTotal] = useState(null);
-
+  const { cartCounts, setCartCounts } = useGlobalContext();
   let filteredCartItems;
   const { user, error, isLoading } = useUser();
   const router = useRouter();
@@ -50,7 +50,8 @@ export default function Checkout() {
     postCheckoutOrder(
       { email: user?.email, orderedItems: currentItems },
       router,
-      setNotification
+      setNotification,
+      setCartCounts
     );
   };
 

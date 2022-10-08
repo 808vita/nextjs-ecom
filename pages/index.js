@@ -5,15 +5,25 @@ import Header from "../components/Header";
 import ProductCard from "../components/ProductCard";
 import { itemsList } from "../data/itemsList";
 import { fetchProducts } from "../resources/LoadData";
+import { useGlobalContext } from "../context/useGlobalContext";
 
 export default function Home() {
   const [inCart, setInCart] = useState(null);
   const [productList, setProductList] = useState(null);
+  const { cartCounts, setCartCounts } = useGlobalContext();
 
   useEffect(() => {
     setInCart(JSON.parse(localStorage.getItem("cartItems")));
     fetchProducts(setProductList);
   }, []);
+
+  useEffect(() => {
+    if (!inCart) {
+      return;
+    }
+    console.log(inCart?.length);
+    setCartCounts(inCart?.length);
+  }, [inCart]);
 
   return (
     <div className="container-fluid mt-5">

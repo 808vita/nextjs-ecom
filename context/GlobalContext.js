@@ -7,12 +7,17 @@ export const GlobalContextProvider = ({ children }) => {
     msg: "Welcome",
     type: "info",
   });
+
+  const [cartCounts, setCartCounts] = useState(null);
+
   //info , error , success
   return (
     <GlobalContext.Provider
       value={{
         notification,
         setNotification,
+        cartCounts,
+        setCartCounts,
       }}
     >
       {children}

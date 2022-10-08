@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { useUser } from "@auth0/nextjs-auth0";
+import { useGlobalContext } from "../context/useGlobalContext";
 const Header = () => {
   const { user, error, isLoading } = useUser();
+  const { cartCounts, setCartCounts } = useGlobalContext();
+
+  useEffect(() => {
+    setCartCounts(JSON.parse(localStorage.getItem("cartItems"))?.length);
+  }, []);
+
+  useEffect(() => {
+    if (!cartCounts) {
+      return;
+    }
+    console.log(cartCounts);
+  }, [cartCounts]);
 
   return (
     <div className="container">
@@ -25,7 +38,7 @@ const Header = () => {
           <div className="d-flex flex-wrap align-items-center justify-content-center">
             <Link href="/cart">
               <a type="button" className="btn btn-outline-success m-3">
-                Cart
+                Cart {cartCounts && cartCounts}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"

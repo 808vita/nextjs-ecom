@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import CartCard from "../components/CartCard";
+import { useGlobalContext } from "../context/useGlobalContext";
 import { itemsList } from "../data/itemsList";
 import { fetchProducts } from "../resources/LoadData";
 
@@ -9,7 +10,7 @@ export default function Cart() {
   const [productList, setProductList] = useState(null);
   const [currentItems, setCurrentItems] = useState(null);
   const [cartTotal, setCartTotal] = useState(null);
-
+  const { cartCounts, setCartCounts } = useGlobalContext();
   useEffect(() => {
     setCartItems(JSON.parse(localStorage.getItem("cartItems")));
     fetchProducts(setProductList);
@@ -40,6 +41,14 @@ export default function Cart() {
       )
     );
   }, [cartItems, productList]);
+
+  useEffect(() => {
+    if (!cartItems) {
+      return;
+    }
+    console.log(cartItems?.length);
+    setCartCounts(cartItems?.length);
+  }, [cartItems]);
 
   return (
     <div

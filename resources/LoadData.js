@@ -45,7 +45,12 @@ export const fetchOrders = async (setOrdersList) => {
   }
 };
 
-export const postCheckoutOrder = async (orderInfo, router, setNotification) => {
+export const postCheckoutOrder = async (
+  orderInfo,
+  router,
+  setNotification,
+  setCartCounts
+) => {
   try {
     const response = await fetch("/api/checkout-order", {
       method: "POST",
@@ -68,6 +73,7 @@ export const postCheckoutOrder = async (orderInfo, router, setNotification) => {
       //navigate ?
       router.push("/profile");
       setNotification({ msg: "Order Placed!", type: "success" });
+      setCartCounts(null);
     }
   } catch (error) {
     console.log("error", error);
