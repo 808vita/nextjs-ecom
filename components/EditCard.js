@@ -24,11 +24,13 @@ const EditCard = ({ data, setSelectedProduct }) => {
             alt="..."
           />
           <div className="card-body">
-            <h5 className="card-title">
+            <h5 className="card-title text-secondary">
               {data.title.substring(0, 10)} ${data.price}
             </h5>
 
-            <p className="card-text">{data.description.substring(0, 25)}</p>
+            <p className="card-text text-secondary">
+              {data.description.substring(0, 25)}
+            </p>
 
             <button className="btn btn-success" onClick={() => handleClick()}>
               Edit Details{" "}
