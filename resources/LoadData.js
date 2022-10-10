@@ -1,4 +1,4 @@
-export const fetchProducts = async (setProductList) => {
+export const fetchProducts = async (setProductList, setLoading) => {
   try {
     const response = await fetch("/api/products", {
       method: "GET",
@@ -15,13 +15,14 @@ export const fetchProducts = async (setProductList) => {
       console.log("oof", json);
       //set state ?
       setProductList(json);
+      setLoading(false);
     }
   } catch (error) {
     console.log("error", error);
   }
 };
 
-export const fetchOrders = async (setOrdersList) => {
+export const fetchOrders = async (setOrdersList, setLoading) => {
   try {
     const response = await fetch("/api/orders", {
       method: "GET",
@@ -38,6 +39,7 @@ export const fetchOrders = async (setOrdersList) => {
       console.log("oof", json);
       //set state ?
       setOrdersList(json);
+      setLoading(false);
     }
   } catch (error) {
     console.log("error", error);

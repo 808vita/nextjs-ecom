@@ -6,15 +6,17 @@ import ProductCard from "../components/ProductCard";
 import { itemsList } from "../data/itemsList";
 import { fetchProducts } from "../resources/LoadData";
 import { useGlobalContext } from "../context/useGlobalContext";
+import { Oval } from "react-loader-spinner";
 
 export default function Home() {
   const [inCart, setInCart] = useState(null);
   const [productList, setProductList] = useState(null);
   const { cartCounts, setCartCounts } = useGlobalContext();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setInCart(JSON.parse(localStorage.getItem("cartItems")));
-    fetchProducts(setProductList);
+    fetchProducts(setProductList, setLoading);
   }, []);
 
   useEffect(() => {
@@ -32,14 +34,29 @@ export default function Home() {
         className="row g-5 text-center  border border-secondary rounded"
         style={{ maxWidth: "1000px", "--bs-border-opacity": 0.25 }}
       >
-        {productList?.map((item) => (
-          <ProductCard
-            key={item._id}
-            data={item}
-            setInCart={setInCart}
-            inCart={inCart}
+        {!loading ? (
+          productList?.map((item) => (
+            <ProductCard
+              key={item._id}
+              data={item}
+              setInCart={setInCart}
+              inCart={inCart}
+            />
+          ))
+        ) : (
+          <Oval
+            height={80}
+            width={80}
+            color="#4fa94d"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+            ariaLabel="oval-loading"
+            secondaryColor="#4fa94d"
+            strokeWidth={2}
+            strokeWidthSecondary={2}
           />
-        ))}
+        )}
       </div>
     </div>
   );

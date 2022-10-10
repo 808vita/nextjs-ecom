@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Oval } from "react-loader-spinner";
 import CartCard from "../components/CartCard";
 import { useGlobalContext } from "../context/useGlobalContext";
 import { itemsList } from "../data/itemsList";
@@ -11,9 +12,11 @@ export default function Cart() {
   const [currentItems, setCurrentItems] = useState(null);
   const [cartTotal, setCartTotal] = useState(null);
   const { cartCounts, setCartCounts } = useGlobalContext();
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     setCartItems(JSON.parse(localStorage.getItem("cartItems")));
-    fetchProducts(setProductList);
+    fetchProducts(setProductList, setLoading);
   }, []);
 
   useEffect(() => {
@@ -55,7 +58,20 @@ export default function Cart() {
       className="container-fluid border border-secondary rounded pt-5 px-5 pe-5"
       style={{ "--bs-border-opacity": 0.25 }}
     >
-      {cartItems?.length > 0 ? (
+      {loading ? (
+        <Oval
+          height={80}
+          width={80}
+          color="#4fa94d"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+          ariaLabel="oval-loading"
+          secondaryColor="#4fa94d"
+          strokeWidth={2}
+          strokeWidthSecondary={2}
+        />
+      ) : cartItems?.length > 0 ? (
         <>
           <h6 className="mb-3 text-center">Current Items In Cart</h6>
 

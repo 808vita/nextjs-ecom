@@ -6,6 +6,7 @@ import { useUser } from "@auth0/nextjs-auth0";
 import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
 import { useGlobalContext } from "../context/useGlobalContext";
+import { Oval } from "react-loader-spinner";
 
 export default function Checkout() {
   const [cartItems, setCartItems] = useState(null);
@@ -19,9 +20,11 @@ export default function Checkout() {
 
   const { setNotification } = useGlobalContext();
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     setCartItems(JSON.parse(localStorage.getItem("cartItems")));
-    fetchProducts(setProductList);
+    fetchProducts(setProductList, setLoading);
   }, [user]);
 
   useEffect(() => {
@@ -60,7 +63,20 @@ export default function Checkout() {
       className="container-fluid border border-secondary rounded pt-5 px-5 pe-5"
       style={{ "--bs-border-opacity": 0.25 }}
     >
-      {currentItems?.length > 0 ? (
+      {loading ? (
+        <Oval
+          height={80}
+          width={80}
+          color="#4fa94d"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+          ariaLabel="oval-loading"
+          secondaryColor="#4fa94d"
+          strokeWidth={2}
+          strokeWidthSecondary={2}
+        />
+      ) : currentItems?.length > 0 ? (
         <>
           <h6 className="mb-3 text-center">Confirm Checkout</h6>
 
