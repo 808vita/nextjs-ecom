@@ -8,20 +8,29 @@ const AddProduct = () => {
   const [type, setType] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
+  const [productQty, setProductQty] = useState("");
   const router = useRouter();
   const { setNotification } = useGlobalContext();
 
   const addProduct = () => {
-    if (!title || !type || type === "Type" || !price || !description) {
+    if (
+      !title ||
+      !type ||
+      type === "Type" ||
+      !price ||
+      !description ||
+      typeof productQty === "string"
+    ) {
       console.log("please fill all fields");
+      console.log({ title, type, price, description, productQty });
       return;
     }
 
     console.log("oof");
-    console.log({ title, type, price, description });
+    console.log({ title, type, price, description, productQty });
 
     postAddProduct(
-      { title, type, price, description },
+      { title, type, price, description, productQty },
       router,
       setNotification
     );
@@ -47,6 +56,18 @@ const AddProduct = () => {
         <option value="Laptop">laptop</option>
         <option value="Mobile">mobile</option>
         <option value="Guitar">guitar</option>
+      </select>
+      <select
+        className="form-select form-select-md mb-3"
+        aria-label=".form-select-md example"
+        onChange={(e) => setProductQty(Number(e.target.value))}
+      >
+        <option>Available Qty</option>
+        <option value={1}>1</option>
+        <option value={2}>2</option>
+        <option value={3}>3</option>
+        <option value={4}>4</option>
+        <option value={5}>5</option>
       </select>
       <div className="input-group input-group-md mb-3">
         <span className="input-group-text">Price</span>

@@ -18,6 +18,10 @@ const productSchema = new Schema(
       type: String,
       required: true,
     },
+    productQty: {
+      type: Number,
+      required: true,
+    },
   },
   {
     timestamps: true,
